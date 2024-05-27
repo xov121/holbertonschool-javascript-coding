@@ -9,9 +9,12 @@ request(url, (error, response, body) => {
     console.log(error);
   } else {
     const films = JSON.parse(body).results;
-    const wedgeFilms = films.filter(film =>
-      film.characters.includes('https://swapi-api.hbtn.io/api/people/18/')
-    );
-    console.log(wedgeFilms.length);
+    const wedgeFilmsCount = films.reduce((count, film) => {
+      if (film.characters.some(character => character.endsWith('/18/'))) {
+        return count + 1;
+      }
+      return count;
+    }, 0);
+    console.log(wedgeFilmsCount);
   }
 });
