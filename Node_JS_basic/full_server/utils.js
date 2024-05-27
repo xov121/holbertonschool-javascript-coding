@@ -6,7 +6,7 @@ function readDatabase(filePath) {
       if (err) {
         reject(new Error('Cannot load the database'));
       } else {
-        const lines = data.split('\n').filter(line => line);
+        const lines = data.split('\n').filter((line) => line);
         const fields = {};
 
         lines.slice(1).forEach((line) => {

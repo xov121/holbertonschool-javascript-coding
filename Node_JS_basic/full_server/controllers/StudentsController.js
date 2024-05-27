@@ -15,7 +15,7 @@ class StudentsController {
 
   static getAllStudentsByMajor(req, res) {
     const databaseFile = process.argv[2];
-    const major = req.params.major;
+    const { major } = req.params;
 
     if (major !== 'CS' && major !== 'SWE') {
       res.status(500).send('Major parameter must be CS or SWE');
@@ -35,7 +35,7 @@ class StudentsController {
   static formatData(data) {
     let result = '';
     for (const field in data) {
-      if (data.hasOwnProperty(field)) {
+      if (field in data) {
         result += `Number of students in ${field}: ${data[field].length}. List: ${data[field].join(', ')}\n`;
       }
     }
